@@ -27,7 +27,7 @@ class Message(db.Model):
 # Route principale de l'application
 @app.route("/")
 def welcome():
-    return render_template('home.html')
+    return render_template('welcome.html')
 
 
 @app.route("/get-messages/<name>", methods=['GET', 'POST'])
@@ -45,7 +45,7 @@ def get_messages(name):
     messages = Message.query.order_by(Message.created_at).all()
     
     # Rendu de la page HTML avec les messages récupérés et le nom passé en paramètre
-    return render_template('index.html', messages=messages, name=name)
+    return render_template('messages.html', messages=messages, name=name)
 
 
 @app.route("/login")

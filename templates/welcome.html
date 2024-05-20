@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style>
+    body {
+        background-color: #fce4ec; /* Couleur rose douce */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .main-content {
+        text-align: center;
+    }
+    .btn-container {
+        margin-top: 20px;
+    }
+    .btn-pink {
+        background-color: #e91e63; /* Couleur de bouton rose */
+        color: white;
+    }
+    .my-form {
+        position: fixed;
+        bottom: 24px;
+        right: 80px;
+        left: 80px;
+        width: calc(100% - 160px);
+        background-color: #fff; /* Fond blanc */
+        border-radius: 20px; /* Coins arrondis */
+        padding: 20px; /* Espacement intérieur */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    }
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="main-content">
+    <h1>Welcome to Lovit</h1>
+    <p>Find your match today!</p>
+    <div class="btn-container">
+        <a href="login.html" class="btn btn-pink me-2">Login</a>
+        <a href="register.html" class="btn btn-pink">Register</a>
+    </div>
+</div>
+{% endblock %}
