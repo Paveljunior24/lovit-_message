@@ -7,18 +7,20 @@ Lovit ist eine moderne Dating-Website, die es Ihnen ermöglicht, mit anderen Per
 - Anzeige von Nachrichten in Echtzeit.
 - Möglichkeit, Nachrichten an andere Benutzer zu senden.
 - Unterstützung für benutzerdefinierte Benutzerprofile.
+- Registrierung ,login, logout  
 
 ## Nächste Schritte
 Die nächsten Schritte zur Verbesserung von Lovit sind:
 
-1. **Erstellung eines sicheren Anmelde-/Anmeldesystems:** Fügen Sie ein Authentifizierungssystem hinzu, damit Benutzer sichere Konten erstellen und sich sicher anmelden können.
-
-2. **Integration einer KI:** Integrieren Sie künstliche Intelligenz, um die Benutzererfahrung zu verbessern, personalisierte Empfehlungen anzubieten und bei der Suche nach kompatiblen Übereinstimmungen zu helfen.
+1. **Integration einer KI:**  um die Benutzererfahrung zu verbessern, personalisierte Empfehlungen anzubieten und bei der Suche nach kompatiblen Übereinstimmungen zu helfen.
 
 ## Verwendete Technologien
-- Python Flask: Web-Framework für die Erstellung der Backend-Anwendung.
-- SQLAlchemy: Objekt-Relationales Mapping-Tool zur Interaktion mit der SQLite-Datenbank.
-- HTML/CSS/Bootstrap: Verwendet für das Design der Benutzeroberfläche.
+- **Python Flask**: Web-Framework für die Erstellung der Backend-Anwendung.
+- **SQLAlchemy**: Objekt-Relationales Mapping-Tool zur Interaktion mit der SQLite-Datenbank.
+- HTML/CSS/Bootstrap
+- **Flask-Login:** Benutzer-Authentifizierung und Sitzungsverwaltung.
+- **Flask-WTF:** Formulare und Validierung.
+- **Flask-Bcrypt:** Passwort-Hashing für sichere Speicherung.
 
 ## So führen Sie die Anwendung lokal aus
 1. Stellen Sie sicher, dass Python und Flask auf Ihrem Computer installiert sind.

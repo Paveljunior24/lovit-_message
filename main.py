@@ -9,13 +9,13 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
-# Configuration de la base de données
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'  # Chemin de la base de données SQLite
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'  # SQLite database path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisakey'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-
+#Flask-login configuration
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view ="login"
@@ -25,19 +25,20 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-# Définition du modèle de la base de données
+# Database model for users
 class User (db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200), nullable=True, unique = True)
     password = db.Column(db.String(50), nullable=False)
 
+# Database model for messages 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(200), nullable=True)
     content = db.Column(db.String(500), nullable=True)
     created_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
-
+#Form for user registration
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(
         min=4, max=20)], render_kw={"placeholder": "username"})
@@ -54,7 +55,7 @@ class RegisterForm(FlaskForm):
         if existing_user_name:
             raise ValidationError(
                 "This Username already exists , please choose a difeerent one.") 
-
+#Form for user login
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(
         min=4, max=20)], render_kw={"placeholder": "username"})
@@ -66,12 +67,12 @@ class LoginForm(FlaskForm):
 
         
 
-# Route principale de l'application
+# Route for the welcome page 
 @app.route("/")
 def welcome():
     return render_template('welcome.html')
 
-
+#Route to Get and Post messages 
 @app.route("/get-messages/<name>", methods=['GET', 'POST'])
 def get_messages(name):
     if request.method == 'POST':
@@ -89,8 +90,7 @@ def get_messages(name):
     # Rendu de la page HTML avec les messages récupérés et le nom passé en paramètre
     return render_template('messages.html', messages=messages, name=name)
 
-
-@app.route("/login", methods=['GET', 'POST'])
+#Route for user login
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -104,20 +104,20 @@ def login():
 
     return render_template('login.html', form=form)
 
-
+# route for the dashborad(requires login)
 @app.route("/dashboard", methods=['GET', 'POST'])
 @login_required
 def dashboard():
     return render_template('dashboard.html')
 
-
+# route for the logout(requires login)
 @app.route("/logout", methods= ['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
-
+# route for the registration
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -146,7 +146,7 @@ def register():
 
 
 
-# Point d'entrée principal de l'application Flask
+# Main entry point of the Flask application
 if __name__ == "__main__":
     with app.app_context():
         # Création de toutes les tables de la base de données si elles n'existent pas encore
